@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="CurrencyEditText">
+		<attr name="locale" format="string"/>
+		<attr name="currency" format="string"/>
+	</declare-styleable>
+	<declare-styleable name="DecimalEditText">
+		<attr name="plural" format="reference"/>
+		<attr name="rounding" format="integer"/>
+	</declare-styleable>
+	<declare-styleable name="MaskedEditText">
+		<attr name="mask" format="string"/>
+		<attr name="placeholder" format="string"/>
+	</declare-styleable>
+</resources>
