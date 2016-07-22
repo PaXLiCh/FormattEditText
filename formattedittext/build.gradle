@@ -1,29 +1,39 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+	compileSdkVersion 24
+	buildToolsVersion "24.0.1"
 
-    defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
+	defaultConfig {
+		minSdkVersion 9
+		targetSdkVersion 24
+		versionCode 1
+		versionName "0.2"
+	}
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_7
+		targetCompatibility JavaVersion.VERSION_1_7
+	}
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.0'
+	compile fileTree(include: ['*.jar'], dir: 'libs')
+	testCompile 'junit:junit:4.12'
+	compile 'com.android.support:appcompat-v7:24.1.1'
+}
+
+publish {
+	groupId = 'com.github.kolotnev'
+	artifactId = 'formatt-edit-text'
+	publishVersion = '0.2'
+	desc = 'A small library with msked input fields for Android'
+	licences = ['GPL-3.0']
+	website = 'https://github.com/PaXLiCh/FormattEditText'
 }
