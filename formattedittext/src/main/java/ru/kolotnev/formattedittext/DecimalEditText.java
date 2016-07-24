@@ -6,8 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.PluralsRes;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,11 +18,12 @@ import java.text.NumberFormat;
 
 /**
  * Input field for decimals.
- * <p/>
+ * <p>
  * Kolotnev Pavel, 2015-2016
  */
 @SuppressWarnings("unused")
 public class DecimalEditText extends AppCompatEditText {
+	public static final String TAG = "DecimalEditText";
 	private BigDecimal value = BigDecimal.ZERO;
 	private String current;
 	private int decimalRounding = 3;
@@ -62,7 +65,9 @@ public class DecimalEditText extends AppCompatEditText {
 		super(context, attrs);
 
 		addTextChangedListener(textWatcher);
-		//setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+		setInputType(getInputType()
+				| InputType.TYPE_CLASS_NUMBER
+				| InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DecimalEditText);
 		final int n = a.getIndexCount();
@@ -111,7 +116,7 @@ public class DecimalEditText extends AppCompatEditText {
 	 * Sets amount of fraction digits for formatting and identifying decimal.
 	 *
 	 * @param decimalRounding
-	 * 		Amount of fraction digits (must be >= 0).
+	 * 		Amount of fraction digits (must be greater than or equal to zero).
 	 */
 	public void setDecimalRounding(final int decimalRounding) {
 		this.decimalRounding = decimalRounding;
@@ -158,15 +163,20 @@ public class DecimalEditText extends AppCompatEditText {
 		updateText();
 	}
 
-	private void parseValue(String str) {
+	private void parseValue(@NonNull String str) {
 		// Remove all non numeric chars
-		String cleanString = str.replaceAll("[^\\d]", "");
+		String cleanString = str.replaceAll("((?<!^)[\\D]|^[^\\d+-]|([+-]$)|(^\\D+$))", "");
 		if (cleanString.length() > 0) {
-			// Construct decimal value as only integer value and move
-			// fraction point according decimalRounding value.
-			value = new BigDecimal(cleanString)
-					.setScale(decimalRounding, BigDecimal.ROUND_FLOOR)
-					.divide(new BigDecimal(Math.pow(10, decimalRounding)), BigDecimal.ROUND_FLOOR);
+			// Construct decimal value as only signed integer value and
+			// move fraction point according decimalRounding value.
+			try {
+				value = new BigDecimal(cleanString)
+						.setScale(decimalRounding, BigDecimal.ROUND_FLOOR)
+						.divide(new BigDecimal(Math.pow(10, decimalRounding)), BigDecimal.ROUND_FLOOR);
+			} catch (NumberFormatException e) {
+				Log.e(TAG, "Failed to convert " + cleanString + " to decimal. Parameter " + str);
+				e.printStackTrace();
+			}
 		} else {
 			// Input field have no any digit
 			value = BigDecimal.ZERO;
@@ -184,7 +194,12 @@ public class DecimalEditText extends AppCompatEditText {
 		} else {
 			current = formattedClear;
 		}
-		int pos = current.indexOf(formattedClear) + formattedClear.length();
+		int pos;
+		if (current.contains(formattedClear)) {
+			pos = current.indexOf(formattedClear) + formattedClear.length();
+		} else {
+			pos = 0;
+		}
 
 		removeTextChangedListener(textWatcher);
 		setText(current);

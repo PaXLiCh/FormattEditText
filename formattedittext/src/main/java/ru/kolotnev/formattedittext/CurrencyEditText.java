@@ -17,16 +17,19 @@ import java.util.Locale;
 
 /**
  * Text field for currency.
- * <p/>
+ * <p>
  * Kolotnev Pavel, 2015-2016
  */
 @SuppressWarnings("unused")
 public class CurrencyEditText extends AppCompatEditText {
 	private static final String TAG = "CurrencyEditText";
+
+	@NonNull
 	private Locale locale;
 	private Currency currency;
 	private BigDecimal value = BigDecimal.ZERO;
 	private String current = "";
+
 	private final TextWatcher textWatcher = new TextWatcher() {
 		private boolean isDeleting;
 
@@ -83,8 +86,7 @@ public class CurrencyEditText extends AppCompatEditText {
 		}
 		a.recycle();
 
-		if (locale == null)
-			locale = Locale.getDefault();
+		locale = Locale.getDefault();
 		if (currency == null)
 			currency = NumberFormat.getCurrencyInstance(locale).getCurrency();
 	}
@@ -114,6 +116,7 @@ public class CurrencyEditText extends AppCompatEditText {
 	 *
 	 * @return Current locale.
 	 */
+	@NonNull
 	public Locale getLocale() {
 		return locale;
 	}

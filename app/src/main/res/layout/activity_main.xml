@@ -10,30 +10,78 @@
 	android:layout_marginTop="@dimen/activity_vertical_margin"
 	android:orientation="vertical">
 
-	<ru.kolotnev.formattedittext.MaskedEditText
-		android:id="@+id/maskEdit"
+	<android.support.design.widget.TextInputLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:ems="10"
-		android:text=""
-		app:mask="(9)99-9A?*"
-		app:placeholder="_"/>
+		android:layout_height="wrap_content">
+
+		<ru.kolotnev.formattedittext.MaskedEditText
+			android:id="@+id/edit_masked"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ems="10"
+			android:hint="@string/hint_masked_input_test"
+			android:text=""
+			app:mask="+999 (999) 999-9A?*"
+			app:placeholder="_"/>
+	</android.support.design.widget.TextInputLayout>
 
 	<TextView
-		android:id="@+id/textView"
+		android:id="@+id/text_masked"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"/>
 
-	<Button
-		android:id="@+id/button1"
+	<android.support.design.widget.TextInputLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Show text without mask"/>
+		android:layout_height="wrap_content">
 
-	<Button
-		android:id="@+id/button2"
+		<ru.kolotnev.formattedittext.DecimalEditText
+			android:id="@+id/edit_decimal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/hint_decimal_test"
+			android:inputType="numberSigned"
+			app:plural="@plurals/plural_decimal_test_decimal"
+			app:rounding="3"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<TextView
+		android:id="@+id/text_decimal"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Show text with mask"/>
+		android:layout_height="wrap_content"/>
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<ru.kolotnev.formattedittext.DecimalEditText
+			android:id="@+id/edit_integer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/hint_integer_test"
+			android:inputType="numberSigned"
+			app:plural="@plurals/plural_decimal_test_integer"
+			app:rounding="0"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<TextView
+		android:id="@+id/text_integer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<ru.kolotnev.formattedittext.CurrencyEditText
+			android:id="@+id/edit_currency"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/hint_currency_test"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<TextView
+		android:id="@+id/text_currency"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
 
 </LinearLayout>

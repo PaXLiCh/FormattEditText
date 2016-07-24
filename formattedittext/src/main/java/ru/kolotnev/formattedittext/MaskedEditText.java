@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 
 /**
  * Masked input field.
- * <p/>
+ * <p>
  * Based on sources from Reinaldo Arrosi
  * https://github.com/reinaldoarrosi/MaskedEditText
  */
@@ -27,7 +27,9 @@ public class MaskedEditText extends AppCompatEditText {
 	private static final char ESCAPE_CHAR = '\\';
 	private static final char PLACEHOLDER = ' ';
 
+	@NonNull
 	private String mask;
+	@NonNull
 	private String placeholder;
 
 	private final TextWatcher textWatcher = new TextWatcher() {
@@ -85,7 +87,10 @@ public class MaskedEditText extends AppCompatEditText {
 		for (int i = 0; i < n; ++i) {
 			int at = a.getIndex(i);
 			if (at == R.styleable.MaskedEditText_mask) {
-				this.mask = mask.length() > 0 ? mask : a.getString(at);
+				String m = a.getString(at);
+				if (mask.isEmpty() && m != null) {
+					mask = m;
+				}
 			} else if (at == R.styleable.MaskedEditText_placeholder) {
 				String pl = a.getString(at);
 				if (pl != null && pl.length() > 0 && placeholder == PLACEHOLDER) {
@@ -96,6 +101,7 @@ public class MaskedEditText extends AppCompatEditText {
 
 		a.recycle();
 
+		this.mask = mask;
 		this.placeholder = String.valueOf(placeholder);
 		addTextChangedListener(textWatcher);
 
@@ -103,15 +109,32 @@ public class MaskedEditText extends AppCompatEditText {
 			setText(getText()); // sets the text to create the mask
 	}
 
+	/**
+	 * Returns the current mask.
+	 *
+	 * @return String used as mask for formatting text in input field.
+	 */
+	@NonNull
 	public String getMask() {
 		return mask;
 	}
 
-	public void setMask(String mask) {
+	/**
+	 * Sets the new mask and updates the text in field.
+	 *
+	 * @param mask
+	 * 		New mask.
+	 */
+	public void setMask(@NonNull String mask) {
 		this.mask = mask;
 		setText(getText());
 	}
 
+	/**
+	 * Returns placeholder char.
+	 *
+	 * @return Char which currently used as placeholder.
+	 */
 	public char getPlaceholder() {
 		return placeholder.charAt(0);
 	}
@@ -135,6 +158,7 @@ public class MaskedEditText extends AppCompatEditText {
 	 *
 	 * @return Current value.
 	 */
+	@NonNull
 	public Editable getText(boolean removeMask) {
 		if (removeMask) {
 			SpannableStringBuilder value = new SpannableStringBuilder(getText());
@@ -145,7 +169,7 @@ public class MaskedEditText extends AppCompatEditText {
 		}
 	}
 
-	private void formatMask(Editable value) {
+	private void formatMask(@NonNull Editable value) {
 		InputFilter[] inputFilters = value.getFilters();
 		value.setFilters(new InputFilter[0]);
 
@@ -197,16 +221,16 @@ public class MaskedEditText extends AppCompatEditText {
 		value.setFilters(inputFilters);
 	}
 
-	private void stripMaskChars(Editable value) {
-		PlaceholderSpan[] pspans = value.getSpans(0, value.length(), PlaceholderSpan.class);
-		LiteralSpan[] lspans = value.getSpans(0, value.length(), LiteralSpan.class);
+	private void stripMaskChars(@NonNull Editable value) {
+		PlaceholderSpan[] pSpans = value.getSpans(0, value.length(), PlaceholderSpan.class);
+		LiteralSpan[] literalSpans = value.getSpans(0, value.length(), LiteralSpan.class);
 
-		for (PlaceholderSpan pspan : pspans) {
-			value.delete(value.getSpanStart(pspan), value.getSpanEnd(pspan));
+		for (PlaceholderSpan s : pSpans) {
+			value.delete(value.getSpanStart(s), value.getSpanEnd(s));
 		}
 
-		for (LiteralSpan lspan : lspans) {
-			value.delete(value.getSpanStart(lspan), value.getSpanEnd(lspan));
+		for (LiteralSpan s : literalSpans) {
+			value.delete(value.getSpanStart(s), value.getSpanEnd(s));
 		}
 	}
 

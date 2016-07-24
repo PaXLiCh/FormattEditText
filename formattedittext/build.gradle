@@ -30,10 +30,10 @@ dependencies {
 }
 
 publish {
-	groupId = 'com.github.kolotnev'
+	groupId = 'ru.kolotnev'
 	artifactId = 'formatt-edit-text'
 	publishVersion = '0.2'
-	desc = 'A small library with msked input fields for Android'
-	licences = ['GPL-3.0']
+	desc = 'Formatted edit text -- a small library with masked input fields for Android.'
+	licences = ['Apache-2.0']
 	website = 'https://github.com/PaXLiCh/FormattEditText'
 }
