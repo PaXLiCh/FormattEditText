@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 
@@ -73,6 +74,9 @@ public class CurrencyEditText extends AppCompatEditText {
 		super(context, attrs);
 
 		addTextChangedListener(textWatcher);
+		setInputType(getInputType()
+				| InputType.TYPE_CLASS_NUMBER
+				| InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CurrencyEditText);
 		final int n = a.getIndexCount();

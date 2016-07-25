@@ -25,6 +25,10 @@ import java.text.NumberFormat;
 public class DecimalEditText extends AppCompatEditText {
 	public static final String TAG = "DecimalEditText";
 	private BigDecimal value = BigDecimal.ZERO;
+	@NonNull
+	private BigDecimal min = BigDecimal.ZERO;
+	@NonNull
+	private BigDecimal max = BigDecimal.ZERO;
 	private String current;
 	private int decimalRounding = 3;
 	@PluralsRes
@@ -100,6 +104,7 @@ public class DecimalEditText extends AppCompatEditText {
 	 */
 	public void setValue(@NonNull BigDecimal value) {
 		this.value = value;
+		clampCurrentValue();
 		updateText();
 	}
 
@@ -163,6 +168,19 @@ public class DecimalEditText extends AppCompatEditText {
 		updateText();
 	}
 
+	/**
+	 * Sets the limits for value which can be entered (both ZERO limits means no limits).
+	 *
+	 * @param min
+	 * 		Minimal value, default ZERO.
+	 * @param max
+	 * 		Maximal value, default ZERO.
+	 */
+	public void setLimits(@NonNull BigDecimal min, @NonNull BigDecimal max) {
+		this.min = min;
+		this.max = max;
+	}
+
 	private void parseValue(@NonNull String str) {
 		// Remove all non numeric chars
 		String cleanString = str.replaceAll("((?<!^)[\\D]|^[^\\d+-]|([+-]$)|(^\\D+$))", "");
@@ -177,9 +195,19 @@ public class DecimalEditText extends AppCompatEditText {
 				Log.e(TAG, "Failed to convert " + cleanString + " to decimal. Parameter " + str);
 				e.printStackTrace();
 			}
+			clampCurrentValue();
 		} else {
 			// Input field have no any digit
 			value = BigDecimal.ZERO;
+		}
+	}
+
+	private void clampCurrentValue() {
+		if (min.compareTo(max) != 0) {
+			if (max.compareTo(value) < 0)
+				value = max;
+			if (min.compareTo(value) > 0)
+				value = min;
 		}
 	}
 
