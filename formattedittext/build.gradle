@@ -33,7 +33,7 @@ publish {
 	groupId = 'ru.kolotnev'
 	artifactId = 'formatt-edit-text'
 	publishVersion = '0.3'
-	desc = 'Formatted edit text -- a small library with masked input fields for Android.'
+	desc = 'Formatted EditText -- a small library with masked input fields for Android.'
 	licences = ['Apache-2.0']
 	website = 'https://github.com/PaXLiCh/FormattEditText'
 }
