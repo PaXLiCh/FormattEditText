@@ -1,3 +1,6 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FormattEditText-green.svg?style=true)](https://android-arsenal.com/details/1/3974)
+[![Download](https://api.bintray.com/packages/paxlich/maven/formatt-edit-text/images/download.svg) ](https://bintray.com/paxlich/maven/formatt-edit-text/_latestVersion)
+
 # Formatted EditText
 
 Simple implementations of a EditText widgets, which can help to visualise inputted text. Classes are inherited from AppCompatEditText.
