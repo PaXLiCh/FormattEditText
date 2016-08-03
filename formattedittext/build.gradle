@@ -8,8 +8,8 @@ android {
 	defaultConfig {
 		minSdkVersion 9
 		targetSdkVersion 24
-		versionCode 3
-		versionName "0.4"
+		versionCode 4
+		versionName "0.5"
 	}
 	buildTypes {
 		release {
@@ -32,7 +32,7 @@ dependencies {
 publish {
 	groupId = 'ru.kolotnev'
 	artifactId = 'formatt-edit-text'
-	publishVersion = '0.4'
+	publishVersion = '0.5'
 	desc = 'Formatted EditText -- a small library with masked input fields for Android.'
 	licences = ['Apache-2.0']
 	website = 'https://github.com/PaXLiCh/FormattEditText'

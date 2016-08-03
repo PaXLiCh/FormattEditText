@@ -234,11 +234,13 @@ public class MaskedEditText extends AppCompatEditText {
 
 		value.setFilters(inputFilters);
 
-		setInputType(inputLength > 0
+		int newInputType =inputLength > 0
 				? (maskIsNotNumeric
 				? InputType.TYPE_CLASS_TEXT
 				: InputType.TYPE_CLASS_NUMBER)
-				: 0);
+				: 0;
+		if (getInputType() != newInputType)
+			setInputType(newInputType);
 	}
 
 	private void stripMaskChars(@NonNull Editable value) {

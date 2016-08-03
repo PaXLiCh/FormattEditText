@@ -12,14 +12,14 @@ Simple implementations of a EditText widgets, which can help to visualise inputt
 
 Add the library project or grab to build.gradle:
 ```groovy
-compile 'ru.kolotnev:formatt-edit-text:0.4'
+compile 'ru.kolotnev:formatt-edit-text:0.5'
 ```
 or plain maven:
 ```maven
 <dependency>
   <groupId>ru.kolotnev</groupId>
   <artifactId>formatt-edit-text</artifactId>
-  <version>0.4</version>
+  <version>0.5</version>
   <type>pom</type>
 </dependency>
 ```
