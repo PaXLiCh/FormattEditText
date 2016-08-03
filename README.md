@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FormattEditText-green.svg?style=true)](https://android-arsenal.com/details/1/3974)
-[![Download](https://api.bintray.com/packages/paxlich/maven/formatt-edit-text/images/download.svg) ](https://bintray.com/paxlich/maven/formatt-edit-text/_latestVersion)
+[![Download](https://api.bintray.com/packages/paxlich/maven/formatt-edit-text/images/download.svg)](https://bintray.com/paxlich/maven/formatt-edit-text/_latestVersion)
 
 # Formatted EditText
 
@@ -41,8 +41,8 @@ Insert the view in XML:
 
 #### Properties:
 
-- mask -- mask for text
-- placeholder -- character will be shown where an input is expected an by default the placeholder char is a white-space
+- mask &mdash; mask for text
+- placeholder &mdash; character will be shown where an input is expected an by default the placeholder char is a white-space
 
 #### Methods:
 
@@ -65,23 +65,30 @@ This method is exaclty like getText() except that you're able to pass a paramete
 The mask is a simple sequence of character where some of these have a special meaning. Any character that does not have a special meaning will be treated as a literal character and will appear as is in the MaskedEditText.
 
 These are the chars that have a special meaning within the mask:
-- 9: Numeric mask (this will accept only numbers to be typed)
-- A: Alpha mask (this will accept only alphabetic letters to be typed)
-- *: Alphanumeric (this will accept numbers and alphabetic letters to be typed)
-- ?: Character mask (this will accept anything to be typed)
+- 9 &mdash; Numeric mask (this will accept only numbers to be typed)
+- A &mdash; Alpha mask (this will accept only alphabetic letters to be typed)
+- * &mdash; Alphanumeric (this will accept numbers and alphabetic letters to be typed)
+- ? &mdash; Character mask (this will accept anything to be typed)
 
 Examples:
 - phone mask: (999) 999-9999
 - money: $999,999,999.99
 - random valid mask: (A)?*99A-9++*??
 
-If you need one of these special chars to be treated as a literal char you can use the escape char '\' in front of it:
+###### Escape char:
+
+If you need one of these special chars to be treated as a literal char you can use the escape char '\\' in front of it:
+
+`Please note that each character '\' must be also escaped, so the number of escapes is always doubled to be '\\'`
 
 Example: Suppose that in the phone mask we need to add a preceding digit that will always be 9, to do this we can change the mask like this:
-- phone mask: \9(999) 999-9999
+- phone mask: `\\9(999) 999-9999`
 
 If you need to display the escape char as a literal char just double the escape char like this:
-- phone mask: \\\\(999) 999-9999
+- phone mask: `\\\\(999) 999-9999`
+
+Escape chars are escape only one character '\\'. Therefore, the following literal characters must also write with the escape character:
+- phone mask: `\\\\\\9(999) 999-9999`
 
 
 ### Decimal EditText
@@ -99,8 +106,8 @@ Insert the view in XML:
 
 #### Properties:
 
-- plural -- plural resource
-- rounding -- amount of digits after comma (zero for integer)
+- plural &mdash; plural resource
+- rounding &mdash; amount of digits after comma (zero for integer)
 
 #### Methods:
 
@@ -142,8 +149,8 @@ Insert the view in XML:
 
 #### Properties:
 
-- currency -- currency code in ISO 4217
-- locale -- locale code in ISO 639
+- currency &mdash; currency code in ISO 4217
+- locale &mdash; locale code in ISO 639
 
 #### Methods:
 

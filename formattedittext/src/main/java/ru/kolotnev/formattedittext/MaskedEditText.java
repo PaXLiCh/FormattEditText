@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -20,6 +21,7 @@ import android.util.AttributeSet;
  */
 @SuppressWarnings("unused")
 public class MaskedEditText extends AppCompatEditText {
+	public static final String TAG = "MaskedEditText";
 	private static final char NUMBER_MASK = '9';
 	private static final char ALPHA_MASK = 'A';
 	private static final char ALPHANUMERIC_MASK = '*';
@@ -125,7 +127,7 @@ public class MaskedEditText extends AppCompatEditText {
 	 * @param mask
 	 * 		New mask.
 	 */
-	public void setMask(@NonNull String mask) {
+	public void setMask(@NonNull final String mask) {
 		this.mask = mask;
 		setText(getText());
 	}
@@ -173,41 +175,53 @@ public class MaskedEditText extends AppCompatEditText {
 		InputFilter[] inputFilters = value.getFilters();
 		value.setFilters(new InputFilter[0]);
 
-		int i = 0;
-		int j = 0;
+		int indexInMask = 0;
+		int indexInText = 0;
 		int maskLength = 0;
+		int inputLength = 0;
 		boolean treatNextCharAsLiteral = false;
+		boolean maskIsNotNumeric = false;
 
 		Object selection = new Object();
 		value.setSpan(selection, Selection.getSelectionStart(value), Selection.getSelectionEnd(value), Spanned.SPAN_MARK_MARK);
 
-		while (i < mask.length()) {
-			if (!treatNextCharAsLiteral && isMaskChar(mask.charAt(i))) {
-				if (j >= value.length()) {
-					value.insert(j, placeholder);
-					value.setSpan(new PlaceholderSpan(), j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-					++j;
-				} else if (!matchMask(mask.charAt(i), value.charAt(j))) {
-					value.delete(j, j + 1);
-					--i;
-					--maskLength;
+		while (indexInMask < mask.length()) {
+			char charInMask = mask.charAt(indexInMask);
+			if (!treatNextCharAsLiteral && isMaskChar(charInMask)) {
+				// Found mask character, try to parse text
+				maskIsNotNumeric |= charInMask != NUMBER_MASK;
+				if (indexInText >= value.length()) {
+					// Add trailing placeholders
+					value.insert(indexInText, placeholder);
+					value.setSpan(new PlaceholderSpan(), indexInText, indexInText + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+					++indexInText;
+					++inputLength;
+					++maskLength;
+					++indexInMask;
+				} else if (!matchMask(charInMask, value.charAt(indexInText))) {
+					// Skip bad character in text
+					value.delete(indexInText, indexInText + 1);
 				} else {
-					++j;
+					// Character in text is acceptable, go to next character in mask
+					++indexInText;
+					++inputLength;
+					++maskLength;
+					++indexInMask;
 				}
-
-				++maskLength;
-			} else if (!treatNextCharAsLiteral && mask.charAt(i) == ESCAPE_CHAR) {
+			} else if (!treatNextCharAsLiteral && charInMask == ESCAPE_CHAR) {
+				// Next character in mask must be escaped
 				treatNextCharAsLiteral = true;
+				++indexInMask;
 			} else {
-				value.insert(j, String.valueOf(mask.charAt(i)));
-				value.setSpan(new LiteralSpan(), j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				// Found a literal or escaped character in mask
+				value.insert(indexInText, String.valueOf(charInMask));
+				value.setSpan(new LiteralSpan(), indexInText, indexInText + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				treatNextCharAsLiteral = false;
 
-				++j;
+				++indexInText;
 				++maskLength;
+				++indexInMask;
 			}
-
-			++i;
 		}
 
 		while (value.length() > maskLength) {
@@ -219,6 +233,12 @@ public class MaskedEditText extends AppCompatEditText {
 		value.removeSpan(selection);
 
 		value.setFilters(inputFilters);
+
+		setInputType(inputLength > 0
+				? (maskIsNotNumeric
+				? InputType.TYPE_CLASS_TEXT
+				: InputType.TYPE_CLASS_NUMBER)
+				: 0);
 	}
 
 	private void stripMaskChars(@NonNull Editable value) {
