@@ -12,14 +12,14 @@ Simple implementations of a EditText widgets, which can help to visualise inputt
 
 Add the library project or grab to build.gradle:
 ```groovy
-compile 'ru.kolotnev:formatt-edit-text:0.3'
+compile 'ru.kolotnev:formatt-edit-text:0.4'
 ```
 or plain maven:
 ```maven
 <dependency>
   <groupId>ru.kolotnev</groupId>
   <artifactId>formatt-edit-text</artifactId>
-  <version>0.3</version>
+  <version>0.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -70,16 +70,16 @@ These are the chars that have a special meaning within the mask:
 - * &mdash; Alphanumeric (this will accept numbers and alphabetic letters to be typed)
 - ? &mdash; Character mask (this will accept anything to be typed)
 
-Examples:
-- phone mask: (999) 999-9999
-- money: $999,999,999.99
-- random valid mask: (A)?*99A-9++*??
+###### Examples:
+- phone mask: `(999) 999-9999`
+- money: `$999,999,999.99`
+- random valid mask: `(A)?*99A-9++*??`
 
 ###### Escape char:
 
-If you need one of these special chars to be treated as a literal char you can use the escape char '\\' in front of it:
+If you need one of these special chars to be treated as a literal char you can use the escape char `\` in front of it:
 
-`Please note that each character '\' must be also escaped, so the number of escapes is always doubled to be '\\'`
+> Please note that each character `\` must be also escaped, so the number of escapes is always doubled to be `\\`
 
 Example: Suppose that in the phone mask we need to add a preceding digit that will always be 9, to do this we can change the mask like this:
 - phone mask: `\\9(999) 999-9999`
@@ -87,9 +87,10 @@ Example: Suppose that in the phone mask we need to add a preceding digit that wi
 If you need to display the escape char as a literal char just double the escape char like this:
 - phone mask: `\\\\(999) 999-9999`
 
-Escape chars are escape only one character '\\'. Therefore, the following literal characters must also write with the escape character:
+Escape chars are escape only one character `\`. Therefore, the following literal characters must be also written with the escape character:
 - phone mask: `\\\\\\9(999) 999-9999`
 
+Do not specify `android:inputType`, it will be automatically set on the fly by specified mask string. If mask string contains only numeric mask characters (and literals), `InputType` will be set to `TYPE_CLASS_NUMBER`, otherwise `TYPE_CLASS_TEXT`.
 
 ### Decimal EditText
 
