@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 			public void afterTextChanged(Editable editable) {
 				textViewCurrency.setText(getString(
 						R.string.text_currency_test,
+						editTextCurrency.getLocale(),
 						editTextCurrency.getCurrency(),
 						editTextCurrency.getValue()));
 			}
@@ -127,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
 
 		textViewCurrency.setText(getString(
 				R.string.text_currency_test,
+				editTextCurrency.getLocale(),
 				editTextCurrency.getCurrency(),
 				editTextCurrency.getValue()));
-
 	}
 }

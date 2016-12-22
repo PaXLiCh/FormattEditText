@@ -20,8 +20,8 @@
 			android:layout_height="wrap_content"
 			android:ems="10"
 			android:hint="@string/hint_masked_input_test"
-			android:text=""
-			app:mask="+999 (999) 999-9A?*"
+			android:text="@string/text_masked_value"
+			app:mask="+90 (99) 99-9A?*"
 			app:placeholder="_"/>
 	</android.support.design.widget.TextInputLayout>
 
@@ -40,6 +40,7 @@
 			android:layout_height="wrap_content"
 			android:hint="@string/hint_decimal_test"
 			android:inputType="numberSigned"
+			android:text="@string/text_decimal_value"
 			app:plural="@plurals/plural_decimal_test_decimal"
 			app:rounding="3"/>
 	</android.support.design.widget.TextInputLayout>
@@ -59,6 +60,7 @@
 			android:layout_height="wrap_content"
 			android:hint="@string/hint_integer_test"
 			android:inputType="numberSigned"
+			android:text="@string/text_integer_value"
 			app:plural="@plurals/plural_decimal_test_integer"
 			app:rounding="0"/>
 	</android.support.design.widget.TextInputLayout>
@@ -76,12 +78,14 @@
 			android:id="@+id/edit_currency"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:hint="@string/hint_currency_test"/>
+			android:hint="@string/hint_currency_test"
+			android:text="@string/text_currency_value"
+			app:currency="GBP"
+			app:locale="JPN"/>
 	</android.support.design.widget.TextInputLayout>
 
 	<TextView
 		android:id="@+id/text_currency"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"/>
-
 </LinearLayout>

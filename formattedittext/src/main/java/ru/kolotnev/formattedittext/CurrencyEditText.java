@@ -3,6 +3,7 @@ package ru.kolotnev.formattedittext;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputType;
@@ -27,7 +28,9 @@ public class CurrencyEditText extends AppCompatEditText {
 
 	@NonNull
 	private Locale locale;
+	@NonNull
 	private Currency currency;
+	@NonNull
 	private BigDecimal value = BigDecimal.ZERO;
 	private String current = "";
 
@@ -54,10 +57,7 @@ public class CurrencyEditText extends AppCompatEditText {
 		public void afterTextChanged(Editable s) {
 			//Log.i(TAG, "::afterTextChanged:" + "Editable " + s + "; Current " + current);
 			String str = s.toString();
-			if (str.length() == 0) {
-				return;
-			}
-			if (str.equals(current)) {
+			if (str.length() > 0 && str.equals(current)) {
 				return;
 			}
 
@@ -67,16 +67,19 @@ public class CurrencyEditText extends AppCompatEditText {
 	};
 
 	public CurrencyEditText(Context context) {
-		this(context, null);
+		this(context, null, null, null);
 	}
 
-	public CurrencyEditText(Context context, AttributeSet attrs) {
-		super(context, attrs);
+	public CurrencyEditText(Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, null, null);
+	}
 
-		addTextChangedListener(textWatcher);
-		setInputType(getInputType()
-				| InputType.TYPE_CLASS_NUMBER
-				| InputType.TYPE_NUMBER_FLAG_DECIMAL);
+	public CurrencyEditText(Context context, @Nullable AttributeSet attrs, @Nullable Locale locale) {
+		this(context, attrs, locale, null);
+	}
+
+	public CurrencyEditText(Context context, @Nullable AttributeSet attrs, @Nullable Locale locale, @Nullable Currency currency) {
+		super(context, attrs);
 
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CurrencyEditText);
 		final int n = a.getIndexCount();
@@ -90,9 +93,20 @@ public class CurrencyEditText extends AppCompatEditText {
 		}
 		a.recycle();
 
-		locale = Locale.getDefault();
+		if (locale == null) {
+			locale = Locale.getDefault();
+		}
+		this.locale = locale;
 		if (currency == null)
 			currency = NumberFormat.getCurrencyInstance(locale).getCurrency();
+		this.currency = currency;
+
+		setInputType(getInputType()
+				| InputType.TYPE_CLASS_NUMBER
+				| InputType.TYPE_NUMBER_FLAG_DECIMAL);
+		addTextChangedListener(textWatcher);
+
+		setText(getText());
 	}
 
 	/**
@@ -100,6 +114,7 @@ public class CurrencyEditText extends AppCompatEditText {
 	 *
 	 * @return Decimal value.
 	 */
+	@NonNull
 	public BigDecimal getValue() {
 		return value;
 	}
@@ -110,7 +125,7 @@ public class CurrencyEditText extends AppCompatEditText {
 	 * @param bigDecimal
 	 * 		New decimal value.
 	 */
-	public void setValue(BigDecimal bigDecimal) {
+	public void setValue(@NonNull BigDecimal bigDecimal) {
 		value = bigDecimal;
 		updateText();
 	}
@@ -141,6 +156,7 @@ public class CurrencyEditText extends AppCompatEditText {
 	 *
 	 * @return Current currency.
 	 */
+	@NonNull
 	public Currency getCurrency() {
 		return currency;
 	}

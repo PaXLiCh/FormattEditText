@@ -34,33 +34,6 @@ public class MaskedEditText extends AppCompatEditText {
 	@NonNull
 	private String placeholder;
 
-	private final TextWatcher textWatcher = new TextWatcher() {
-		private boolean updating = false;
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			/* do nothing */
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			/* do nothing */
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			if (updating || mask.length() == 0)
-				return;
-
-			updating = true;
-
-			stripMaskChars(s);
-			formatMask(s);
-
-			updating = false;
-		}
-	};
-
 	public MaskedEditText(Context context) {
 		this(context, "");
 	}
@@ -100,11 +73,37 @@ public class MaskedEditText extends AppCompatEditText {
 				}
 			}
 		}
-
 		a.recycle();
 
 		this.mask = mask;
 		this.placeholder = String.valueOf(placeholder);
+
+		TextWatcher textWatcher = new TextWatcher() {
+			private boolean updating = false;
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				/* do nothing */
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				/* do nothing */
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (updating || MaskedEditText.this.mask.length() == 0)
+					return;
+
+				updating = true;
+
+				stripMaskChars(s);
+				formatMask(s);
+
+				updating = false;
+			}
+		};
 		addTextChangedListener(textWatcher);
 
 		if (mask.length() > 0)
@@ -234,7 +233,7 @@ public class MaskedEditText extends AppCompatEditText {
 
 		value.setFilters(inputFilters);
 
-		int newInputType =inputLength > 0
+		int newInputType = inputLength > 0
 				? (maskIsNotNumeric
 				? InputType.TYPE_CLASS_TEXT
 				: InputType.TYPE_CLASS_NUMBER)

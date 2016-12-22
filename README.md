@@ -1,5 +1,6 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FormattEditText-green.svg?style=true)](https://android-arsenal.com/details/1/3974)
 [![Download](https://api.bintray.com/packages/paxlich/maven/formatt-edit-text/images/download.svg)](https://bintray.com/paxlich/maven/formatt-edit-text/_latestVersion)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/PaXLiCh/FormattEditText/blob/master/LICENSE)
 
 # Formatted EditText
 
@@ -59,7 +60,7 @@ This is used to set the placeholder character. This character is shown where an 
 This method returns the current character that is being used as the placeholder char.
 
 **getText(boolean removeMask)**
-This method is exaclty like getText() except that you're able to pass a parameter that will determine if the value returned will contain the mask characters or not.
+This method is exactly like getText() except that you're able to pass a parameter that will determine if the value returned will contain the mask characters or not.
 
 #### Mask
 The mask is a simple sequence of character where some of these have a special meaning. Any character that does not have a special meaning will be treated as a literal character and will appear as is in the MaskedEditText.

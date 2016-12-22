@@ -24,6 +24,7 @@ import java.text.NumberFormat;
 @SuppressWarnings("unused")
 public class DecimalEditText extends AppCompatEditText {
 	public static final String TAG = "DecimalEditText";
+	@NonNull
 	private BigDecimal value = BigDecimal.ZERO;
 	@NonNull
 	private BigDecimal min = BigDecimal.ZERO;
@@ -47,12 +48,7 @@ public class DecimalEditText extends AppCompatEditText {
 		@Override
 		public void afterTextChanged(Editable s) {
 			String str = s.toString();
-
-			if (str.length() == 0) {
-				return;
-			}
-
-			if (str.equals(current)) {
+			if (str.length() > 0 && str.equals(current)) {
 				return;
 			}
 
@@ -68,11 +64,6 @@ public class DecimalEditText extends AppCompatEditText {
 	public DecimalEditText(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		addTextChangedListener(textWatcher);
-		setInputType(getInputType()
-				| InputType.TYPE_CLASS_NUMBER
-				| InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DecimalEditText);
 		final int n = a.getIndexCount();
 		for (int i = 0; i < n; ++i) {
@@ -84,6 +75,13 @@ public class DecimalEditText extends AppCompatEditText {
 			}
 		}
 		a.recycle();
+
+		setInputType(getInputType()
+				| InputType.TYPE_CLASS_NUMBER
+				| InputType.TYPE_NUMBER_FLAG_DECIMAL);
+		addTextChangedListener(textWatcher);
+
+		setText(getText());
 	}
 
 	/**

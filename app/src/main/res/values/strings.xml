@@ -1,19 +1,23 @@
 <resources>
 	<string name="app_name">Formatted input fields examples</string>
 	<string name="text_masked_test">Mask: %1$s value: %2$s</string>
-	<string name="text_decimal_test">Decimal rounding: %1$s; value: %2$f</string>
-	<string name="text_integer_test">Decimal rounding: %1$s; value: %2$d</string>
-	<string name="text_currency_test">Currency: %1$s; value: %2$f</string>
+	<string name="text_decimal_test">Decimal rounding: %1$d; value: %2$f</string>
+	<string name="text_integer_test">Decimal rounding: %1$d; value: %2$d</string>
+	<string name="text_currency_test">Locale: %1$s; currency: %2$s; value: %3$f</string>
 	<string name="hint_masked_input_test">Masked input test</string>
 	<string name="hint_decimal_test">Decimal test</string>
 	<string name="hint_integer_test">Integer test</string>
 	<string name="hint_currency_test">Currency test</string>
+	<string name="text_masked_value">+698769876</string>
+	<string name="text_decimal_value">200200</string>
+	<string name="text_integer_value">123</string>
+	<string name="text_currency_value">12350</string>
 	<plurals name="plural_decimal_test_decimal">
-		<item quantity="zero">%s g_zero</item>
-		<item quantity="one">%s g_one</item>
-		<item quantity="few">%s g_few</item>
-		<item quantity="many">%s g_many</item>
-		<item quantity="other">%s g_other</item>
+		<item quantity="zero">%s zero</item>
+		<item quantity="one">%s one</item>
+		<item quantity="few">%s few</item>
+		<item quantity="many">%s many</item>
+		<item quantity="other">%s other</item>
 	</plurals>
 	<plurals name="plural_decimal_test_integer">
 		<item quantity="zero">%s cats</item>
