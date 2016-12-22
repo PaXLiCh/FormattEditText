@@ -30,7 +30,6 @@ dependencies {
 }
 
 publish {
-	userOrg = 'Kolotnev Pavel'
 	groupId = 'ru.kolotnev'
 	artifactId = 'formatt-edit-text'
 	publishVersion = '0.6'
