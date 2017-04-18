@@ -13,14 +13,14 @@ Useful components for formatting phone numbers, prices, counters. Simple impleme
 
 Add the library project or grab to build.gradle:
 ```groovy
-compile 'ru.kolotnev:formatt-edit-text:0.6'
+compile 'ru.kolotnev:formatt-edit-text:0.7'
 ```
 or plain maven:
 ```maven
 <dependency>
   <groupId>ru.kolotnev</groupId>
   <artifactId>formatt-edit-text</artifactId>
-  <version>0.6</version>
+  <version>0.7</version>
   <type>pom</type>
 </dependency>
 ```
