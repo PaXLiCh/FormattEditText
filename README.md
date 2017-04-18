@@ -4,7 +4,7 @@
 
 # Formatted EditText
 
-Simple implementations of a EditText widgets, which can help to visualise inputted text. Classes are inherited from AppCompatEditText.
+Useful components for formatting phone numbers, prices, counters. Simple implementations of a EditText widgets, which can help to visualise inputted text. Classes are inherited from AppCompatEditText.
 
 **MaskedEditText** based on code of [Reinaldo Arrosi](https://github.com/reinaldoarrosi/MaskedEditText)
 
@@ -68,7 +68,7 @@ The mask is a simple sequence of character where some of these have a special me
 These are the chars that have a special meaning within the mask:
 - 9 &mdash; Numeric mask (this will accept only numbers to be typed)
 - A &mdash; Alpha mask (this will accept only alphabetic letters to be typed)
-- * &mdash; Alphanumeric (this will accept numbers and alphabetic letters to be typed)
+- \* &mdash; Alphanumeric (this will accept numbers and alphabetic letters to be typed)
 - ? &mdash; Character mask (this will accept anything to be typed)
 
 ###### Examples:
