@@ -4,7 +4,7 @@
 
 # Formatted EditText
 
-Useful components for formatting phone numbers, prices, counters. Simple implementations of a EditText widgets, which can help to visualise inputted text. Classes are inherited from AppCompatEditText.
+Useful components for formatting phone numbers, prices, counters. Simple implementations of a EditText widgets, which can help to visualize inputted text. Classes are inherited from AppCompatEditText.
 
 **MaskedEditText** based on code of [Reinaldo Arrosi](https://github.com/reinaldoarrosi/MaskedEditText)
 
