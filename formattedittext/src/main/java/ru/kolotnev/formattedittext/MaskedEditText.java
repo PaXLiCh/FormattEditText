@@ -2,8 +2,6 @@ package ru.kolotnev.formattedittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -12,6 +10,10 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 
 /**
  * Masked input field.
@@ -159,7 +161,7 @@ public class MaskedEditText extends AppCompatEditText {
 	 *
 	 * @return Current value.
 	 */
-	@NonNull
+	@Nullable
 	public Editable getText(boolean removeMask) {
 		if (removeMask) {
 			SpannableStringBuilder value = new SpannableStringBuilder(getText());

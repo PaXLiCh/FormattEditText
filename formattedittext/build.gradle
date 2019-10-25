@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-	compileSdkVersion 28
-	buildToolsVersion "28.0.3"
+	compileSdkVersion 29
+	buildToolsVersion "29.0.2"
 
 	defaultConfig {
-		minSdkVersion 9
-		targetSdkVersion 28
-		versionCode 7
-		versionName "0.7"
+		minSdkVersion 14
+		targetSdkVersion 29
+		versionCode 8
+		versionName "0.8"
 	}
 	buildTypes {
 		release {
@@ -26,13 +26,13 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 	testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:+'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 }
 
 publish {
 	groupId = 'ru.kolotnev'
 	artifactId = 'formatt-edit-text'
-	publishVersion = '0.7'
+	publishVersion = '0.8'
 	desc = 'Formatted EditText — a small library with masked input fields for Android.'
 	licences = ['Apache-2.0']
 	website = 'https://github.com/PaXLiCh/FormattEditText'

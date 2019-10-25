@@ -2,14 +2,15 @@ package ru.kolotnev.formattedittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.annotation.PluralsRes;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.PluralsRes;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,7 +20,7 @@ import java.text.NumberFormat;
 /**
  * Input field for decimals.
  * <p>
- * Kolotnev Pavel, 2015-2016
+ * Kolotnev Pavel, 2015-2019
  */
 @SuppressWarnings("unused")
 public class DecimalEditText extends AppCompatEditText {
@@ -215,10 +216,10 @@ public class DecimalEditText extends AppCompatEditText {
 		df.setMaximumFractionDigits(decimalRounding);
 		df.setRoundingMode(RoundingMode.FLOOR);
 		String formattedClear = df.format(value);
-		if (pluralLabel > 0) {
-			current = getResources().getQuantityString(pluralLabel, value.intValue(), formattedClear);
-		} else {
+		if (pluralLabel == 0) {
 			current = formattedClear;
+		} else {
+			current = getResources().getQuantityString(pluralLabel, value.intValue(), formattedClear);
 		}
 		int pos;
 		if (current.contains(formattedClear)) {

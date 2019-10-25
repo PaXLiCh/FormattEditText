@@ -1,10 +1,11 @@
 package ru.kolotnev.formattedittextexample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ru.kolotnev.formattedittext.CurrencyEditText;
 import ru.kolotnev.formattedittext.DecimalEditText;
@@ -18,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		// Masked input test
-		final MaskedEditText editTextMasked = (MaskedEditText) findViewById(R.id.edit_masked);
-		final TextView textViewMasked = (TextView) findViewById(R.id.text_masked);
+		final MaskedEditText editTextMasked = findViewById(R.id.edit_masked);
+		final TextView textViewMasked = findViewById(R.id.text_masked);
 		editTextMasked.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 				editTextMasked.getText(true)));
 
 		// Decimal input test
-		final DecimalEditText editTextDecimal = (DecimalEditText) findViewById(R.id.edit_decimal);
-		final TextView textViewDecimal = (TextView) findViewById(R.id.text_decimal);
+		final DecimalEditText editTextDecimal = findViewById(R.id.edit_decimal);
+		final TextView textViewDecimal = findViewById(R.id.text_decimal);
 		editTextDecimal.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 				editTextDecimal.getValue()));
 
 		// Integer input test
-		final DecimalEditText editTextInteger = (DecimalEditText) findViewById(R.id.edit_integer);
-		final TextView textViewInteger = (TextView) findViewById(R.id.text_integer);
+		final DecimalEditText editTextInteger = findViewById(R.id.edit_integer);
+		final TextView textViewInteger = findViewById(R.id.text_integer);
 		editTextInteger.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -103,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
 				editTextInteger.getValue().intValue()));
 
 		// Currency input test
-		final CurrencyEditText editTextCurrency = (CurrencyEditText) findViewById(R.id.edit_currency);
-		final TextView textViewCurrency = (TextView) findViewById(R.id.text_currency);
+		final CurrencyEditText editTextCurrency = findViewById(R.id.edit_currency);
+		final TextView textViewCurrency = findViewById(R.id.text_currency);
 		editTextCurrency.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

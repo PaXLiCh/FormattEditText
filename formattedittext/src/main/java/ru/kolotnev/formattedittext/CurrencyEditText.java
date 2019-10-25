@@ -2,13 +2,14 @@ package ru.kolotnev.formattedittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -20,7 +21,7 @@ import java.util.Locale;
 /**
  * Text field for currency.
  * <p>
- * Kolotnev Pavel, 2015-2016
+ * Kolotnev Pavel, 2015-2019
  */
 @SuppressWarnings("unused")
 public class CurrencyEditText extends AppCompatEditText {
@@ -86,7 +87,10 @@ public class CurrencyEditText extends AppCompatEditText {
 		for (int i = 0; i < n; ++i) {
 			int at = a.getIndex(i);
 			if (at == R.styleable.CurrencyEditText_locale) {
-				locale = new Locale(a.getString(at));
+				String lang = a.getString(at);
+				if (lang != null) {
+					locale = new Locale(lang);
+				}
 			} else if (at == R.styleable.CurrencyEditText_currency) {
 				currency = Currency.getInstance(a.getString(at));
 			}
@@ -97,8 +101,12 @@ public class CurrencyEditText extends AppCompatEditText {
 			locale = Locale.getDefault();
 		}
 		this.locale = locale;
-		if (currency == null)
+		if (currency == null) {
 			currency = NumberFormat.getCurrencyInstance(locale).getCurrency();
+		}
+		if (currency == null) {
+			currency = Currency.getInstance("USD");
+		}
 		this.currency = currency;
 
 		setInputType(getInputType()
