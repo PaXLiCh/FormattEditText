@@ -20,7 +20,7 @@ import java.text.NumberFormat;
 /**
  * Input field for decimals.
  * <p>
- * Kolotnev Pavel, 2015-2019
+ * Kolotnev Pavel, 2015-2020
  */
 @SuppressWarnings("unused")
 public class DecimalEditText extends AppCompatEditText {

@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 /**
  * Masked input field.
  * <p>
+ * Kolotnev Pavel, 2015-2020
  * Based on sources from Reinaldo Arrosi
  * https://github.com/reinaldoarrosi/MaskedEditText
  */
@@ -276,11 +277,11 @@ public class MaskedEditText extends AppCompatEditText {
 		return false;
 	}
 
-	private class PlaceholderSpan {
+	private static class PlaceholderSpan {
 		// this class is used just to keep track of placeholders in the text
 	}
 
-	private class LiteralSpan {
+	private static class LiteralSpan {
 		// this class is used just to keep track of literal chars in the text
 	}
 }

@@ -21,7 +21,7 @@ import java.util.Locale;
 /**
  * Text field for currency.
  * <p>
- * Kolotnev Pavel, 2015-2019
+ * Kolotnev Pavel, 2015-2020
  */
 @SuppressWarnings("unused")
 public class CurrencyEditText extends AppCompatEditText {
