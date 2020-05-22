@@ -13,14 +13,14 @@ Useful components for formatting phone numbers, prices, counters. Simple impleme
 
 Add the library project or grab to build.gradle:
 ```groovy
-compile 'ru.kolotnev:formatt-edit-text:0.7'
+compile 'ru.kolotnev:formatt-edit-text:0.8'
 ```
 or plain maven:
 ```maven
 <dependency>
   <groupId>ru.kolotnev</groupId>
   <artifactId>formatt-edit-text</artifactId>
-  <version>0.7</version>
+  <version>0.8</version>
   <type>pom</type>
 </dependency>
 ```
@@ -93,6 +93,8 @@ Escape chars are escape only one character `\`. Therefore, the following literal
 
 Do not specify `android:inputType`, it will be automatically set on the fly by specified mask string. If mask string contains only numeric mask characters (and literals), `InputType` will be set to `TYPE_CLASS_NUMBER`, otherwise `TYPE_CLASS_TEXT`.
 
+
+
 ### Decimal EditText
 
 Insert the view in XML:
@@ -136,6 +138,7 @@ Set whole format of edit text field for displaying decimal value.
 
 **setLimits(BigDecimal min, BigDecimal max)**
 Sets the limits for value which can be entered (both ZERO limits means no limits).
+
 
 
 ### Currency EditText
