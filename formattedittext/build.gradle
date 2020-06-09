@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 android {
 	compileSdkVersion 29
@@ -24,23 +23,68 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	testImplementation 'junit:junit:4.13'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+	implementation 'androidx.appcompat:appcompat:1.1.0'
 }
 
-publish {
-	groupId = 'ru.kolotnev'
-	artifactId = 'formatt-edit-text'
-	publishVersion = '0.8'
-	desc = 'Formatted EditText — a small library with masked input fields for Android.'
-	licences = ['Apache-2.0']
-	website = 'https://github.com/PaXLiCh/FormattEditText'
-	bintrayUser = 'paxlich'
-	userOrg = 'kolotnev'
-	bintrayUser = 'paxlich'
+
+apply plugin: 'maven-publish'
+afterEvaluate {
+	publishing {
+		publications {
+			// Creates a Maven publication called "release".
+			release(MavenPublication) {
+				// Applies the component for the release build variant.
+				from components.release
+				groupId 'ru.kolotnev'
+				artifactId 'formatt-edit-text'
+				version '0.8'
+			}
+			// Creates a Maven publication called "release".
+			debug(MavenPublication) {
+				// Applies the component for the release build variant.
+				from components.debug
+				groupId 'ru.kolotnev'
+				artifactId 'formatt-edit-text-debug'
+				version '0.8'
+			}
+		}
+	}
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+apply plugin: 'com.jfrog.bintray'
+//gradle -Puser=someuser -Pkey=ASDFASDFASDF bintrayUpload
+bintray {
+	user = properties.hasProperty('bintray.user') ? properties.property('bintray.user') : System.getenv('BINTRAY_USER')
+	key = properties.hasProperty('bintray.apikey') ? properties.property('bintray.apikey') : System.getenv('BINTRAY_API_KEY')
+	publications = ['release', 'debug']
+	pkg {
+		repo = 'maven'
+		name = 'FormattEditText'
+		websiteUrl = 'https://github.com/PaXLiCh/FormattEditText'
+		issueTrackerUrl = 'https://github.com/PaXLiCh/FormattEditText/issues'
+		vcsUrl = 'https://github.com/PaXLiCh/FormattEditText.git'
+		userOrg = 'kolotnev'
+		licenses = ['Apache-2.0']
+		publish = true
+		publicDownloadNumbers = true
+		version {
+			name = '0.8'
+			desc = 'Formatted EditText — a small library with masked input fields for Android.'
+			released  = new Date()
+			vcsTag = '0.8'
+			attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+		}
+	}
+}
+
+
+/*
+// Generate files to publication without using maven-publish
 // build a jar with source files
 task sourcesJar(type: Jar) {
 	archiveClassifier.set('sources')
@@ -62,4 +106,4 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
 	archives sourcesJar
 	archives javadocJar
-}
+}*/
