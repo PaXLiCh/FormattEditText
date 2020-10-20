@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdkVersion 29
-	buildToolsVersion "29.0.3"
+	compileSdkVersion 30
+	buildToolsVersion "30.0.2"
 
 	defaultConfig {
 		applicationId "ru.kolotnev.formattedittextexample"
 		minSdkVersion 14
-		targetSdkVersion 29
+		targetSdkVersion 30
 		versionCode 1
 		versionName "1.0"
 	}
@@ -26,8 +26,8 @@ android {
 dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	testImplementation 'junit:junit:4.13'
-	implementation 'androidx.appcompat:appcompat:1.1.0'
-	implementation 'com.google.android.material:material:1.1.0'
+	implementation 'androidx.appcompat:appcompat:1.2.0'
+	implementation 'com.google.android.material:material:1.2.1'
 	//implementation project(':formattedittext')
 	implementation 'ru.kolotnev:formatt-edit-text:0.8'
 }

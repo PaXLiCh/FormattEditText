@@ -189,7 +189,7 @@ public class DecimalEditText extends AppCompatEditText {
 			try {
 				value = new BigDecimal(cleanString)
 						.setScale(decimalRounding, BigDecimal.ROUND_FLOOR)
-						.divide(new BigDecimal(Math.pow(10, decimalRounding)), BigDecimal.ROUND_FLOOR);
+						.divide(BigDecimal.valueOf(Math.pow(10, decimalRounding)), BigDecimal.ROUND_FLOOR);
 			} catch (NumberFormatException e) {
 				Log.e(TAG, "Failed to convert " + cleanString + " to decimal. Parameter " + str);
 				e.printStackTrace();
