@@ -55,7 +55,7 @@ public class CurrencyEditText extends AppCompatEditText {
 		}
 
 		@Override
-		public void afterTextChanged(Editable s) {
+		public void afterTextChanged(@NonNull Editable s) {
 			//Log.i(TAG, "::afterTextChanged:" + "Editable " + s + "; Current " + current);
 			String str = s.toString();
 			if (str.length() > 0 && str.equals(current)) {
@@ -186,7 +186,7 @@ public class CurrencyEditText extends AppCompatEditText {
 	 * @param str
 	 * 		String with digits.
 	 */
-	private void parseValue(String str) {
+	private void parseValue(@NonNull String str) {
 		// Remove all non numeric chars
 		String cleanString = str.replaceAll("[^\\d]", "");
 		if (cleanString.length() > 0) {
@@ -206,6 +206,7 @@ public class CurrencyEditText extends AppCompatEditText {
 	 *
 	 * @return Currency formatter for current locale and currency.
 	 */
+	@NonNull
 	private DecimalFormat getCurrencyFormatter() {
 		NumberFormat.getCurrencyInstance();
 		NumberFormat format = NumberFormat.getCurrencyInstance(locale);

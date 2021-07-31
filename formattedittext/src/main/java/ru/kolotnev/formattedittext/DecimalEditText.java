@@ -47,7 +47,7 @@ public class DecimalEditText extends AppCompatEditText {
 		}
 
 		@Override
-		public void afterTextChanged(Editable s) {
+		public void afterTextChanged(@NonNull Editable s) {
 			String str = s.toString();
 			if (str.length() > 0 && str.equals(current)) {
 				return;
